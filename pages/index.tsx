@@ -1,4 +1,8 @@
+import TableBank from '@/Cells/TableBank';
+import { dataFormater } from '@/helper/dataFormater';
 import MainLayout from '@/layouts/MainLayout/MainLayout';
+import { InterfaceTableRows } from '@/molecules/RowTable/type';
+import { Paper } from '@mui/material';
 import Grid from '@mui/material/Grid';
 import { GetServerSideProps } from 'next';
 import { ReactElement } from 'react';
@@ -7,7 +11,7 @@ import { NextPageWithLayout } from './_app';
 type BankListProps = {
     bankList: BankProps[];
 };
-type BankProps = {
+export type BankProps = {
     description: string;
     bankName: string;
     age: number;
@@ -15,7 +19,8 @@ type BankProps = {
 };
 
 const Home: NextPageWithLayout<BankListProps> = ({ bankList }) => {
-    console.log('🚀 ~ file: index.tsx:7 ~ Home ~ bankList:', bankList);
+    const dataBank = dataFormater(bankList) as InterfaceTableRows[];
+    console.log('🚀 ~ file: index.tsx:21 ~ dataBank:', dataBank);
     return (
         <Grid
             container
@@ -25,26 +30,9 @@ const Home: NextPageWithLayout<BankListProps> = ({ bankList }) => {
                 alignItems: 'center',
             }}
         >
-            <Grid
-                item
-                md={4}
-                sx={{
-                    display: 'grid',
-                    placeItems: 'center',
-                }}
-            >
-                hola
-            </Grid>
-            <Grid
-                item
-                md={4}
-                sx={{
-                    display: 'grid',
-                    placeItems: 'center',
-                }}
-            >
-                hola
-            </Grid>
+            <Paper elevation={5} sx={{ width: '90%', borderRadius: '20px' }}>
+                <TableBank data={dataBank} />
+            </Paper>
         </Grid>
     );
 };
