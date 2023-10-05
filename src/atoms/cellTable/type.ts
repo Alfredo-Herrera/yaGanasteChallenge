@@ -2,7 +2,7 @@ import { ReactNode } from 'react';
 
 export type InterfaceCellTable = {
     align: 'left' | 'center' | 'right' | 'justify' | 'inherit' | undefined;
-    textTransform: string;
+    textTransform?: string;
     width: string;
     children: ReactNode | ReactNode[];
     type: string;
@@ -31,5 +31,9 @@ export type InterfaceCellTable = {
         icon: string;
         onClick: () => void;
         size: 'small' | 'medium' | 'large' | undefined;
+    };
+    avatar?: {
+        url: string;
+        alt: string;
     };
 };
