@@ -8,5 +8,4 @@ export type interfaceHeaderDataTable = {
     label: string;
     disableMobile: boolean;
     align: 'right' | 'inherit' | 'left' | 'center' | 'justify' | undefined;
-    useOnSortServerSide: boolean;
 };
