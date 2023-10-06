@@ -20,7 +20,6 @@ export type BankProps = {
 
 const Home: NextPageWithLayout<BankListProps> = ({ bankList }) => {
     const dataBank = dataFormater(bankList) as InterfaceTableRows[];
-    console.log('🚀 ~ file: index.tsx:21 ~ dataBank:', dataBank);
     return (
         <Grid
             container
