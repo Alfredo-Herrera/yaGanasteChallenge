@@ -29,7 +29,7 @@ export type InterfaceCellTable = {
     button?: {
         title: string;
         icon: string;
-        onClick: () => void;
+        onClick: (dataModal: {}) => void;
         size: 'small' | 'medium' | 'large' | undefined;
     };
     avatar?: {
@@ -37,3 +37,8 @@ export type InterfaceCellTable = {
         alt: string;
     };
 };
+
+export interface IconDictionary {
+    // eslint-disable-next-line no-undef
+    [key: string]: JSX.Element;
+}
