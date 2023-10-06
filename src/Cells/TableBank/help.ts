@@ -23,6 +23,12 @@ export const titlesHeader: interfaceHeaderDataTable[] = [
         id: 'anio',
         label: 'Año',
         align: 'left',
+        disableMobile: true,
+    },
+    {
+        id: 'details',
+        label: 'Detalles',
+        align: 'left',
         disableMobile: false,
     },
 ];

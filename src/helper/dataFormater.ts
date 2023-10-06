@@ -2,7 +2,11 @@ import { InterfaceCellTable } from '@/atoms/cellTable/type';
 import { InterfaceTableRows } from '@/molecules/RowTable/type';
 import { BankProps } from '../../pages';
 
-export const dataFormater = (dataArray: BankProps[]): InterfaceTableRows[] => {
+export const dataFormater = (
+    dataArray: BankProps[],
+    callBack: () => void,
+    dataModal: (dataViewModal: BankProps) => void
+): InterfaceTableRows[] => {
     return dataArray.map((itemArray, index) => {
         return {
             row: [
@@ -15,7 +19,19 @@ export const dataFormater = (dataArray: BankProps[]): InterfaceTableRows[] => {
                 },
                 { ...dataStructure(itemArray.bankName, 'text', false) },
                 { ...dataStructure(itemArray.description, 'text', true) },
-                { ...dataStructure(itemArray.age, 'text', false) },
+                { ...dataStructure(itemArray.age, 'text', true) },
+                {
+                    ...dataStructure(itemArray.age, 'button', false),
+                    button: {
+                        size: 'small',
+                        onClick: () => {
+                            callBack();
+                            dataModal(itemArray);
+                        },
+                        title: 'details',
+                        icon: 'details',
+                    },
+                },
             ],
             id: `${index}-cell-${itemArray.bankName}`,
         };

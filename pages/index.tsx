@@ -1,11 +1,12 @@
 import TableBank from '@/Cells/TableBank';
 import { dataFormater } from '@/helper/dataFormater';
 import MainLayout from '@/layouts/MainLayout/MainLayout';
+import ModalTakeDecision from '@/molecules/ModalInfo';
 import { InterfaceTableRows } from '@/molecules/RowTable/type';
 import { Paper } from '@mui/material';
 import Grid from '@mui/material/Grid';
 import { GetServerSideProps } from 'next';
-import { ReactElement } from 'react';
+import { ReactElement, useState } from 'react';
 import { NextPageWithLayout } from './_app';
 
 type BankListProps = {
@@ -19,7 +20,20 @@ export type BankProps = {
 };
 
 const Home: NextPageWithLayout<BankListProps> = ({ bankList }) => {
-    const dataBank = dataFormater(bankList) as InterfaceTableRows[];
+    const [dataModal, setDataModal] = useState<BankProps>();
+    const [viewModal, setViewModal] = useState(false);
+    const viewModalOpen = () => {
+        setViewModal((prevState) => !prevState);
+    };
+    const setDataViewModal = (dataModalView: BankProps) => {
+        setDataModal(dataModalView);
+    };
+    const dataBank = dataFormater(
+        bankList,
+        viewModalOpen,
+        setDataViewModal
+    ) as InterfaceTableRows[];
+
     return (
         <Grid
             container
@@ -32,6 +46,16 @@ const Home: NextPageWithLayout<BankListProps> = ({ bankList }) => {
             <Paper elevation={5} sx={{ width: '90%', borderRadius: '20px' }}>
                 <TableBank data={dataBank} />
             </Paper>
+            <ModalTakeDecision
+                moreInfo={`Edad: ${dataModal?.age}`}
+                img={dataModal?.url || ''}
+                title={dataModal?.bankName || ''}
+                description={dataModal?.description || ''}
+                decisionFuntion={viewModalOpen}
+                openModal={viewModal}
+                closeModal={viewModalOpen}
+                loading={false}
+            />
         </Grid>
     );
 };
