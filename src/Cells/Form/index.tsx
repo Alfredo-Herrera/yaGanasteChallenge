@@ -21,7 +21,7 @@ const SeccionForm = () => {
         },
         onSubmit: async (values, { resetForm }) => {
             dispatch(setDataPage(values));
-            // resetForm();
+            resetForm();
         },
         validationSchema: DATA_SCHEMA,
     });

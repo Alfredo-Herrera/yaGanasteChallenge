@@ -14,14 +14,12 @@ type TableProps = {
 const TableBank: FC<TableProps> = ({ data }) => {
     const { data: dataFilter } = useSelector((state: filter) => state.filter);
 
-    console.log('🚀 ~ file: index.tsx:17 ~ dataFilter:', dataFilter);
-
     const dispatch = useDispatch();
 
     const searchDataFilter = (name: string) => {
         const newData = data.filter((item) => {
             const dataString = item.row[1].children as string;
-            if (dataString!.includes(name)) {
+            if (dataString.toLowerCase()!.includes(name)) {
                 return item;
             }
         });
